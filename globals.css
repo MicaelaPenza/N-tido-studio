@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/*
+  Sistema de diseño Nítido Studio
+  --------------------------------
+  Paleta: bordó profundo como acento de marca sobre una base
+  cálida de beige y crema. Proporción aproximada 70% beige/crema,
+  20% blanco cálido, 10% bordó.
+
+  Tipografía: pila de fuentes del sistema (sin dependencia de
+  internet). "Display" para títulos con personalidad, "sans"
+  para interfaz.
+*/
+
+@theme {
+  /* Marca */
+  --color-bordo-950: #3d1620;
+  --color-bordo-900: #4a1c29;
+  --color-bordo: #6b2635; /* color principal */
+  --color-bordo-600: #7c3040;
+  --color-bordo-400: #a8677a;
+  --color-bordo-200: #e3c7cf;
+  --color-bordo-100: #f0dfe3;
+
+  /* Fondo y superficies */
+  --color-beige: #f4ebdd; /* fondo predominante */
+  --color-beige-dark: #e8dac5;
+  --color-crema: #fbf6ee; /* cards */
+  --color-blanco-calido: #fffdf9;
+
+  /* Texto */
+  --color-texto: #2a211c; /* marrón muy oscuro */
+  --color-texto-suave: #6b5e53;
+  --color-texto-invertido: #f4ebdd;
+
+  /* Estados de contenido */
+  --color-estado-idea: #e8dac5;
+  --color-estado-pendiente: #ded0b4;
+  --color-estado-proceso: #b98a97;
+  --color-estado-listo: #8a9a7e;
+  --color-estado-publicado: #a39a8c;
+
+  /* Bordes */
+  --color-borde: #e2d5c3;
+
+  /* Tipografía: fuentes del sistema, sin carga de red */
+  --font-display: "Poppins", "Century Gothic", "Segoe UI Rounded", "Avenir Next",
+    "Trebuchet MS", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Segoe UI", "Avenir Next", "Helvetica Neue", ui-sans-serif,
+    system-ui, -apple-system, Roboto, Arial, sans-serif;
+
+  --radius-nitido: 0.85rem;
+
+  --shadow-suave: 0 1px 2px rgba(42, 33, 28, 0.04), 0 4px 16px rgba(42, 33, 28, 0.06);
+  --shadow-suave-hover: 0 2px 4px rgba(42, 33, 28, 0.06), 0 8px 24px rgba(42, 33, 28, 0.09);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-beige);
+    color: var(--color-texto);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-bordo);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .card-nitido {
+    background-color: var(--color-crema);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radius-nitido);
+    box-shadow: var(--shadow-suave);
+  }
+
+  .btn-primario {
+    background-color: var(--color-bordo);
+    color: var(--color-texto-invertido);
+    border-radius: 999px;
+    font-weight: 600;
+    transition: background-color 150ms ease;
+  }
+
+  .btn-primario:hover {
+    background-color: var(--color-bordo-900);
+  }
+
+  .btn-secundario {
+    background-color: transparent;
+    color: var(--color-bordo);
+    border: 1px solid var(--color-bordo-200);
+    border-radius: 999px;
+    font-weight: 600;
+    transition: background-color 150ms ease, border-color 150ms ease;
+  }
+
+  .btn-secundario:hover {
+    background-color: var(--color-bordo-100);
+    border-color: var(--color-bordo-400);
+  }
+
+  .campo-input {
+    background-color: var(--color-crema);
+    border: 1px solid var(--color-borde);
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.9375rem;
+    color: var(--color-texto);
+    width: 100%;
+  }
+
+  .campo-input:focus-visible {
+    outline: 2px solid var(--color-bordo);
+    outline-offset: 1px;
+  }
+}
