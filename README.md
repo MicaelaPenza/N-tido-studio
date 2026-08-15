@@ -67,7 +67,7 @@ data/
 Este proyecto se construye por etapas. Estado actual:
 
 - [x] Etapa 1 — Proyecto, base de datos, seed y layout principal.
-- [ ] Etapa 2 — Dashboard funcional.
+- [x] Etapa 2 — Dashboard funcional.
 - [ ] Etapa 3 — Clientes y detalle de cliente.
 - [ ] Etapa 4 — Creación y gestión de contenido.
 - [ ] Etapa 5 — Calendario.
