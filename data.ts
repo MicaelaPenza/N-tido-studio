@@ -75,6 +75,53 @@ export function getIdeas(filtros?: {
   return getDb().prepare(query).all(...params) as Idea[];
 }
 
+export function getProximoContenido(clienteId: number): Contenido | undefined {
+  return getDb()
+    .prepare(
+      `SELECT * FROM contenidos
+       WHERE cliente_id = ? AND estado != 'publicado'
+       ORDER BY fecha ASC, hora ASC LIMIT 1`
+    )
+    .get(clienteId) as Contenido | undefined;
+}
+
+export function getPendientesCount(clienteId: number): number {
+  return (
+    getDb()
+      .prepare(
+        "SELECT COUNT(*) as n FROM contenidos WHERE cliente_id = ? AND estado != 'publicado'"
+      )
+      .get(clienteId) as { n: number }
+  ).n;
+}
+
+export interface EstadisticasCliente {
+  total: number;
+  publicados: number;
+  pendientes: number;
+}
+
+export function getEstadisticasCliente(clienteId: number): EstadisticasCliente {
+  const db = getDb();
+  const total = (
+    db.prepare("SELECT COUNT(*) as n FROM contenidos WHERE cliente_id = ?").get(clienteId) as {
+      n: number;
+    }
+  ).n;
+  const publicados = (
+    db
+      .prepare("SELECT COUNT(*) as n FROM contenidos WHERE cliente_id = ? AND estado = 'publicado'")
+      .get(clienteId) as { n: number }
+  ).n;
+  return { total, publicados, pendientes: total - publicados };
+}
+
+export function getIdeasDeCliente(clienteId: number): Idea[] {
+  return getDb()
+    .prepare("SELECT * FROM ideas WHERE cliente_id = ? ORDER BY created_at DESC")
+    .all(clienteId) as Idea[];
+}
+
 export interface ResumenDashboard {
   hoy: number;
   pendientes: number;

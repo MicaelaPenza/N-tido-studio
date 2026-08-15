@@ -17,8 +17,8 @@ export function ContenidoDelDiaItem({
   const hora = formatearHora(contenido.hora);
 
   function onCambiarEstado(nuevoEstado: string) {
-    startTransition(() => {
-      actualizarEstadoContenido(contenido.id, nuevoEstado);
+    startTransition(async () => {
+      await actualizarEstadoContenido(contenido.id, nuevoEstado);
     });
   }
 
